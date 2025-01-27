@@ -13,15 +13,13 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final RoleRepository roleRepository;
-
     private final UserService userService;
 
+
     @Autowired
-    public AdminController(RoleRepository roleRepository, UserService userService) {
-        this.roleRepository = roleRepository;
+    public AdminController(UserService userService) {
         this.userService = userService;
-    }
+        }
 
     @GetMapping("/")
     public String findAll(Model model){
@@ -31,7 +29,7 @@ public class AdminController {
 
     @GetMapping("/new")
     public String newUser (Model model){
-        model.addAttribute("allRoles", roleRepository.findAll());
+        model.addAttribute("allRoles", userService.findAll());
         model.addAttribute("user", new User());
         return "user-create";
     }
@@ -51,7 +49,7 @@ public class AdminController {
     @GetMapping("/update")
     public String updateForm(@RequestParam Long id, Model model) {
         User user = userService.getById(id);
-        model.addAttribute("allRoles", roleRepository.findAll());
+        model.addAttribute("allRoles", userService.findAll());
         model.addAttribute("user", user);
         return "update";
     }
@@ -59,7 +57,6 @@ public class AdminController {
     @PostMapping("/update")
     public String update(@ModelAttribute("user") User user) {
         userService.update(user);
-        System.out.println("AAAAAAAAAAAAAAAA");
         return "redirect:/admin/";
     }
 }
