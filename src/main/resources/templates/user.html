@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>It's your profile!</title>
+</head>
+<body>
+
+<div th:text="${user.getUsername()}"></div>
+<div th:text="${user.getEmail()}"></div>
+<div th:text="${user.getPassword()}"></div>
+
+
+</body>
+<form action="/logout" method="post" th:action="@{/logout}">
+    <button type="submit">Выйти</button>
+</form>
+</html>
