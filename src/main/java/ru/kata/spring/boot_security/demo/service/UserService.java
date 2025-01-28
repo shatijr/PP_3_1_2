@@ -21,6 +21,6 @@ public interface UserService extends UserDetailsService {
 
     User findByUsername(String username);
 
-    List <Role> findAll();
+
 
 }
